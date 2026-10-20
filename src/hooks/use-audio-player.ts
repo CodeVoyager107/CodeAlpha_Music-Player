@@ -47,7 +47,7 @@ export function useAudioPlayer(tracks: Track[]) {
 
     const onMeta = () => {
       setDuration(audio.duration);
-      setDurations((d) => ({ ...d, [tracks[settings.current.index].id]: audio.duration }));
+      setDurations((d) => ({ ...d, [tracks[settings.current.index]!.id]: audio.duration }));
     };
     const onTime = () => setCurrentTime(audio.currentTime);
     const onPlay = () => setIsPlaying(true);
@@ -109,7 +109,7 @@ export function useAudioPlayer(tracks: Track[]) {
     setError(null);
     setCurrentTime(0);
     setDuration(0);
-    audio.src = tracks[index].src;
+    audio.src = tracks[index]!.src;
     audio.load();
     if (shouldPlayRef.current) {
       audio.play().catch(() => setIsPlaying(false));
@@ -183,7 +183,7 @@ export function useAudioPlayer(tracks: Track[]) {
   );
 
   return {
-    track: tracks[index],
+    track: tracks[index]!,
     index,
     isPlaying,
     currentTime,

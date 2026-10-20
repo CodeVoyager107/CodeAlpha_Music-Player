@@ -105,7 +105,7 @@ function PlayerPage() {
               value={[p.currentTime]}
               max={p.duration || 1}
               step={0.1}
-              onValueChange={([v]) => p.seek(v)}
+              onValueChange={([v]) => p.seek(v ?? 0)}
             />
             <div className="mt-2 flex justify-between text-xs tabular-nums text-muted-foreground">
               <span>{formatTime(p.currentTime)}</span>
@@ -138,7 +138,7 @@ function PlayerPage() {
             <IconButton aria-label={p.muted ? "Unmute" : "Mute"} onClick={p.toggleMute}>
               <VolIcon className="h-5 w-5" />
             </IconButton>
-            <Slider aria-label="Volume" className="min-w-28 flex-1" value={[effectiveVol]} max={100} step={1} onValueChange={([v]) => p.setVolume(v)} />
+            <Slider aria-label="Volume" className="min-w-28 flex-1" value={[effectiveVol]} max={100} step={1} onValueChange={([v]) => p.setVolume(v ?? 0)} />
             <span className="w-8 text-right text-xs tabular-nums text-muted-foreground">{effectiveVol}</span>
             <label className="ml-auto flex items-center gap-2 text-sm text-muted-foreground">
               Autoplay <Switch checked={p.autoplay} onCheckedChange={p.setAutoplay} />
@@ -171,7 +171,7 @@ function PlayerPage() {
                     </div>
                     {current && p.isPlaying && <Equalizer />}
                     <span className="w-10 text-right text-xs tabular-nums text-muted-foreground">
-                      {p.durations[t.id] ? formatTime(p.durations[t.id]) : "--:--"}
+                      {p.durations[t.id] ? formatTime(p.durations[t.id] ?? 0) : "--:--"}
                     </span>
                   </button>
                 </li>
